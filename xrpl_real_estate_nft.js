@@ -3,8 +3,8 @@ const xrpl = require("xrpl");
 // XRPL Testnet Connection
 const client = new xrpl.Client("wss://s.altnet.rippletest.net:51233");
 
-// Superland's XRPL Wallet (Replace with your Testnet credentials)
-const issuerWallet = xrpl.Wallet.fromSeed("s████████████████████████"); // Replace with your wallet seed
+// Superland's XRPL Wallet
+const issuerWallet = xrpl.Wallet.fromSeed("0xbe2bc7ac7f692c8d792896cf30102e90331f8d57"); // Superland testnet Wallet 
 
 async function mintRealEstateNFT(property) {
     await client.connect();
