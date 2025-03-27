@@ -1,0 +1,26 @@
+Mint NFT (/mint) - ✅ Present in the new code.
+
+Create Trustline (/trustline) - ✅ Present in the new code.
+
+Create Offer (/create_offer) - ✅ Present in the new code.
+
+Request DeFi Loan (/defi_loan) - ✅ Present in the new code.
+
+The new code has improved the DeFi Loan request process to return available lenders, which is an enhancement.
+
+Error Handling: - ✅ Better Error Handling in the new code.
+
+Additional Features in New Code:
+
+Listing Marketplace Offers (/list_offers) - (New Feature) ✅
+
+Accepting Offers (/accept_offer) - (New Feature) ✅
+
+Error Handling: Improved throughout the code.
+
+Offer Management: New endpoints to list and accept offers.
+
+Better UI Integration: The frontend is now able to handle marketplace interactions.
+
+Automatic Refresh of Offers: Offers refresh after accepting one, making the experience smoother.
+

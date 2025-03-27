@@ -1,11 +1,7 @@
-/* Project Structure */
-
-// Folder: Backend (Node.js)
-// File: index.js
-
 const express = require('express');
 const cors = require('cors');
 const xrpl = require('xrpl');
+const axios = require('axios');
 
 const app = express();
 app.use(cors());
@@ -14,16 +10,19 @@ app.use(express.json());
 const client = new xrpl.Client('https://s.altnet.rippletest.net:51234/');
 let wallet;
 
-// Connect to XRPL
 client.connect().then(() => {
     console.log('Connected to XRPL Testnet');
     wallet = xrpl.Wallet.fromSeed('s████████████████████████████'); // Replace with actual wallet seed
+}).catch(error => {
+    console.error('Failed to connect to XRPL Testnet:', error.message);
 });
 
 // Mint NFT
 app.post('/mint', async (req, res) => {
     try {
         const { metadata } = req.body;
+        if (!metadata) throw new Error('Metadata is required');
+        
         const hexMetadata = Buffer.from(metadata).toString('hex');
         const transaction = {
             TransactionType: 'NFTokenMint',
@@ -45,6 +44,8 @@ app.post('/mint', async (req, res) => {
 app.post('/trustline', async (req, res) => {
     try {
         const { issuer, currencyCode } = req.body;
+        if (!issuer || !currencyCode) throw new Error('Issuer and Currency Code are required');
+        
         const transaction = {
             TransactionType: 'TrustSet',
             Account: wallet.classicAddress,
@@ -68,6 +69,8 @@ app.post('/trustline', async (req, res) => {
 app.post('/create_offer', async (req, res) => {
     try {
         const { nftId, amount } = req.body;
+        if (!nftId || !amount) throw new Error('NFT ID and Amount are required');
+        
         const transaction = {
             TransactionType: 'NFTokenCreateOffer',
             Account: wallet.classicAddress,
@@ -89,11 +92,9 @@ app.post('/create_offer', async (req, res) => {
 app.post('/defi_loan', async (req, res) => {
     try {
         const { defiAmount } = req.body;
-
-        const nftRequest = {
-            command: 'account_nfts',
-            account: wallet.classicAddress
-        };
+        if (!defiAmount) throw new Error('Loan amount is required');
+        
+        const nftRequest = { command: 'account_nfts', account: wallet.classicAddress };
         const nftResponse = await client.request(nftRequest);
         const availableNfts = nftResponse.result.account_nfts;
 
@@ -107,6 +108,38 @@ app.post('/defi_loan', async (req, res) => {
         }
 
         res.json({ message: `DeFi Loan of ${approvedLoanAmount} granted against tokenized copper.`, collateral: availableNfts });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// List Offers
+app.get('/list_offers', async (req, res) => {
+    try {
+        const request = { command: 'account_offers', account: wallet.classicAddress };
+        const response = await client.request(request);
+        res.json({ message: 'Offers Retrieved Successfully', offers: response.result.offers });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Accept Offer
+app.post('/accept_offer', async (req, res) => {
+    try {
+        const { offerSequence } = req.body;
+        if (!offerSequence) throw new Error('Offer Sequence is required');
+        
+        const transaction = {
+            TransactionType: 'NFTokenAcceptOffer',
+            Account: wallet.classicAddress,
+            OfferSequence: offerSequence
+        };
+        const prepared = await client.autofill(transaction);
+        const signed = wallet.sign(prepared);
+        const result = await client.submitAndWait(signed.tx_blob);
+
+        res.json({ message: 'Offer Accepted Successfully', result });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

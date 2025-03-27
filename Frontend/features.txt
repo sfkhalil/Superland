@@ -1,0 +1,20 @@
+Mint NFT: ✅
+
+Create Trustline: ✅
+
+Create Offer: ✅
+
+Request DeFi Loan: ✅
+
+Display Available Offers: (New Feature) ✅
+
+Accept Offer: (New Feature) ✅
+
+Lender Display: Shows available lenders and their interest rates. ✅
+
+Improved UI: Uses Card components for better structure. ✅
+
+Error Handling: Uses Toast notifications for better UX. ✅
+
+Automatic Refresh of Offers: Refreshes the offers list after accepting an offer. ✅
+

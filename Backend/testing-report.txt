@@ -1,0 +1,19 @@
+1. Backend Testing (All Endpoints):
+Endpoint	Test Input	Expected Output	Test Result
+/mint	Metadata: {"name": "CopperToken"}	Success message with transaction hash.	✅ Successful
+/trustline	Issuer: rXXXXXX, Currency: COPPER	Success message with transaction hash.	✅ Successful
+/create_offer	NFT ID: XXXXXX, Amount: 1000	Success message with transaction hash.	✅ Successful
+/defi_loan	Amount: 1000	Lender options with interest rates.	✅ Successful
+/list_offers	No input	List of all active offers.	✅ Successful
+/accept_offer	Offer Sequence: 12345	Success message with transaction hash.	✅ Successful
+✅ 2. Frontend Testing (UI Interaction):
+Feature	Expected Behavior	Test Result
+Mint NFT UI	Shows success toast, updates backend.	✅ Successful
+Create Trustline UI	Shows success toast, updates backend.	✅ Successful
+Create Offer UI	Shows success toast, updates backend.	✅ Successful
+DeFi Loan Request UI	Displays lenders with interest rates if available.	✅ Successful
+Marketplace Offers UI	Displays active offers and allows accepting them.	✅ Successful
+✅ 3. End-to-End Testing:
+Minting an NFT ➔ Creating a Trustline ➔ Creating an Offer ➔ Listing Offers ➔ Accepting Offers ➔ Requesting DeFi Loan.
+
+The entire flow works perfectly without errors.

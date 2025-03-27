@@ -1,0 +1,35 @@
+Advanced Features
+
+On-Chain Metadata Storage:
+
+Storing metadata of NFTs directly on-chain for transparency and immutability.
+
+Dynamic Pricing Model:
+
+Implementing a dynamic pricing mechanism using Oracles to fetch real-time copper prices and adjust offers accordingly.
+
+Multi-Signature Support:
+
+Adding multi-signature transactions to improve security and decentralized governance.
+
+DeFi Loan Marketplace:
+
+Allowing multiple lenders to provide loans against tokenized assets.
+
+Ranking lenders by interest rates and availability.
+
+Automated Collateral Monitoring:
+
+Smart contract-based logic to monitor collateral value and trigger liquidations if value drops below a certain threshold.
+
+Improved UI/UX with React Native:
+
+Enhanced interface for managing offers, viewing marketplace statistics, and requesting loans.
+
+Complete Transaction History:
+
+Keeping a detailed transaction log for user reference and analytics.
+
+Integration with XRPL Decentralized Identifiers (DIDs):
+
+To provide identity verification for lenders and borrowers.
