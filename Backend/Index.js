@@ -1,3 +1,9 @@
+//RWA tokenization marketplace for commodities - copper using XRPL ledger
+//also contains defi marketplace for tokenized copper
+//App.js Node backend to handle client requests from webclients or wallets. 
+
+
+
 const express = require('express');
 const cors = require('cors');
 const xrpl = require('xrpl');
